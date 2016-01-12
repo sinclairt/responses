@@ -25,4 +25,4 @@ You can use the controller responses ``` doStore ``` and ``` doUpdate ``` to sta
 
 The ``` SterlingResponse ``` class takes care of organising your content and returning it appropriate either as JSON or a as a redirect with a message in the session.
  
-The methods are ``` SterlingResponse::success() ``` and ``` SterlingResponse::failure() ``` passing in any arguments you want to return back in the response. 
+The methods are ``` SterlingResponse::success() ``` and ``` SterlingResponse::failure() ``` passing in any arguments you want to return back in the response.
