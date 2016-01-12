@@ -17,7 +17,10 @@ Add the following repository to your ``` composer.json ```. You will have access
 
 ``` composer require sterling/responses```
 
-``` composer install ```
+Register the service provider:
+``` Sterling\Responses\SterlingResponsesServiceProvider ```
+
+``` composer dump-autoload ```
 
 
 ### Usage
