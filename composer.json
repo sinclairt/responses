@@ -1,0 +1,28 @@
+{
+  "name": "sterling/responses",
+  "description": "Standardise success and failure responses to both server and client side processing",
+  "type": "library",
+  "require": {
+    "illuminate/view": "^5.1",
+    "illuminate/support": "^5.1",
+    "illuminate/contracts": "^5.1"
+  },
+  "autoload": {
+    "psr-0": {
+      "Sterling\\Responses": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mat Marlow",
+      "email": "mmarlow@sterlingsolutions.co.uk"
+    },
+    {
+      "name": "Tom Sinclair",
+      "email": "tsinclair@sterlingsolutions.co.uk"
+    }
+
+  ],
+  "minimum-stability": "dev"
+}
