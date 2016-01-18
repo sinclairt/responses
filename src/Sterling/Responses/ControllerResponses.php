@@ -21,11 +21,13 @@ trait ControllerResponses
      * @param param Request $createRequest
      * @param string $route
      *
+     * @param null $routeParams
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function doStore($createRequest, $route = null)
+    protected function doStore($createRequest, $route = null, $routeParams = null)
     {
-        return $this->crudResponse($this->repository->add($createRequest->all()), $route);
+        return $this->crudResponse($this->repository->add($createRequest->all()), $route, $routeParams);
     }
 
     /**
@@ -36,9 +38,11 @@ trait ControllerResponses
      *
      * @param string $route
      *
+     * @param null $routeParams
+     *
      * @return mixed
      */
-    protected function doUpdate($updateRequest, Model $model, $route = null)
+    protected function doUpdate($updateRequest, Model $model, $route = null, $routeParams = null)
     {
         try
         {
@@ -51,7 +55,7 @@ trait ControllerResponses
             $result = false;
         }
 
-        return $this->crudResponse($result, $route);
+        return $this->crudResponse($result, $route, $routeParams);
     }
 
     /**
