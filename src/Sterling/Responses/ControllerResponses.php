@@ -73,7 +73,7 @@ trait ControllerResponses
     {
         return $this->isAjax() ?
             $resultOfRepositoryAction ?
-                SterlingResponse::jsonSuccess($this->successMessage($message)) :
+                SterlingResponse::jsonSuccess(['message' => $this->successMessage($message), 'data' => $resultOfRepositoryAction]) :
                 SterlingResponse::jsonFailure($this->failureMessage($message)) :
             $this->redirectToRoute($route, $routeParams, $message);
     }
