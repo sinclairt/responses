@@ -1,6 +1,6 @@
 <?php
 
-namespace Sterling\Responses;
+namespace Sinclair\Responses;
 
 use Request;
 use Illuminate\Database\Eloquent\Model;
@@ -73,8 +73,8 @@ trait ControllerResponses
     {
         return $this->isAjax() ?
             $resultOfRepositoryAction ?
-                SterlingResponse::jsonSuccess(array_merge($this->successMessage($message), ['data' => $resultOfRepositoryAction])) :
-                SterlingResponse::jsonFailure($this->failureMessage($message)) :
+                SinclairResponse::jsonSuccess(array_merge($this->successMessage($message), ['data' => $resultOfRepositoryAction])) :
+                SinclairResponse::jsonFailure($this->failureMessage($message)) :
             $this->redirectToRoute($route, $routeParams, $message);
     }
 

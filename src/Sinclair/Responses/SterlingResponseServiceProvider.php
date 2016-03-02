@@ -1,10 +1,10 @@
 <?php
 
-namespace Sterling\Responses;
+namespace Sinclair\Responses;
 
 use Illuminate\Support\ServiceProvider;
 
-class SterlingResponseServiceProvider extends ServiceProvider
+class SinclairResponseServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -23,7 +23,7 @@ class SterlingResponseServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'responses');
 
         $this->publishes([
-            __DIR__ . '/../../lang'           => base_path('resources/lang/vendor/sterling-responses')
+            __DIR__ . '/../../lang'           => base_path('resources/lang/vendor/sinclair-responses')
         ]);
     }
 

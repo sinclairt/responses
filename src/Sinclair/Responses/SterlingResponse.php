@@ -1,4 +1,4 @@
-<?php namespace Sterling\Responses;
+<?php namespace Sinclair\Responses;
 
 use Illuminate\Support\Facades\Response as LaravelResponse;
 use Log;
@@ -8,7 +8,7 @@ use Lang;
 define('AJAX_RESPONSE_STATUS_SUCCESS', 'success');
 define('AJAX_RESPONSE_STATUS_FAILURE', 'failure');
 
-class SterlingResponse extends LaravelResponse
+class SinclairResponse extends LaravelResponse
 {
 
     /**
@@ -32,7 +32,7 @@ class SterlingResponse extends LaravelResponse
 		if (count($args) == 1 && is_string(reset($args))){
 			$response_array[ 'message' ] = reset($args);
 		}else{
-            if(!is_array(reset($args))) throw new \Exception("Array not provided to SterlingResponse");
+            if(!is_array(reset($args))) throw new \Exception("Array not provided to SinclairResponse");
             $response_array = array_merge($response_array, reset($args));
         }
 

@@ -1,5 +1,5 @@
 {
-  "name": "sterling/responses",
+  "name": "sinclair/responses",
   "description": "Standardise success and failure responses to both server and client side processing",
   "type": "library",
   "require": {
@@ -9,18 +9,14 @@
   },
   "autoload": {
     "psr-0": {
-      "Sterling\\Responses": "src/"
+      "Sinclair\\Responses": "src/"
     }
   },
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Mat Marlow",
-      "email": "mmarlow@sterlingsolutions.co.uk"
-    },
+  "authors":
     {
       "name": "Tom Sinclair",
-      "email": "tsinclair@sterlingsolutions.co.uk"
+      "email": "tom.sinclair31@gmail.com"
     }
 
   ],
