@@ -10,7 +10,7 @@ Add the following repository to your ``` composer.json ```. You will have access
   "repositories": [
     {
       "type": "composer",
-      "url": "http://satis.sinclair-design.co.uk"
+      "url": "http://satis.wtbidev.co.uk"
     }
   ]
 ```
