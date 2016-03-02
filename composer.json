@@ -17,8 +17,6 @@
     {
       "name": "Tom Sinclair",
       "email": "tom.sinclair31@gmail.com"
-    }
-
-  ],
+    },
   "minimum-stability": "dev"
 }
