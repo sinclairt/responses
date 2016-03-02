@@ -14,9 +14,9 @@
   },
   "license": "MIT",
   "authors":
-    {
+  [{
       "name": "Tom Sinclair",
       "email": "tom.sinclair31@gmail.com"
-    },
+    }],
   "minimum-stability": "dev"
 }
