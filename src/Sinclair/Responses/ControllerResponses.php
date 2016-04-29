@@ -90,10 +90,9 @@ trait ControllerResponses
      */
     public function getRouteName()
     {
-        if ($this->prefix != null)
-            return $this->prefix . '.' . $this->class;
+        $class = strtolower(str_replace('Controller', '', class_basename($this)));
 
-        return $this->class;
+        return $this->prefix != null ? $this->prefix . '.' . $class : $class;
     }
 
     /**
