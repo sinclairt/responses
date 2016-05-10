@@ -23,11 +23,13 @@ trait ControllerResponses
      *
      * @param null $routeParams
      *
+     * @param null $message
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function doStore( $createRequest, $route = null, $routeParams = null )
+    protected function doStore( $createRequest, $route = null, $routeParams = null, $message = null )
     {
-        return $this->crudResponse($this->repository->add($createRequest->all()), $route, $routeParams);
+        return $this->crudResponse($this->repository->add($createRequest->all()), $route, $routeParams, $message);
     }
 
     /**
@@ -40,9 +42,11 @@ trait ControllerResponses
      *
      * @param null $routeParams
      *
+     * @param null $message
+     *
      * @return mixed
      */
-    protected function doUpdate( $updateRequest, Model $model, $route = null, $routeParams = null )
+    protected function doUpdate( $updateRequest, Model $model, $route = null, $routeParams = null, $message = null )
     {
         try
         {
@@ -55,7 +59,7 @@ trait ControllerResponses
             $result = false;
         }
 
-        return $this->crudResponse($result, $route, $routeParams);
+        return $this->crudResponse($result, $route, $routeParams, $message);
     }
 
     /**
@@ -176,8 +180,16 @@ trait ControllerResponses
      */
     public function getRouteName()
     {
-        $class = strtolower(str_replace('Controller', '', class_basename($this)));
+        $class = strtolower($this->getResourceName());
 
         return $this->prefix != null ? $this->prefix . '.' . $class : $class;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getResourceName()
+    {
+        return str_replace('Controller', '', class_basename($this));
     }
 }

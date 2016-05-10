@@ -25,8 +25,8 @@ class SinclairResponse extends LaravelResponse
 			'status'  => $status,
 			'success' => $status == AJAX_RESPONSE_STATUS_SUCCESS,
 			// convenience boolean var
-			'title'   => Lang::get('responses.' . $status . '.title'),
-			'message' => Lang::get('responses.' . $status . '.message')
+			'title'   => trans('responses::responses.' . $status . '.title'),
+			'message' => trans('responses::responses.' . $status . '.message')
 		];
 
 		if (count($args) == 1 && is_string(reset($args))){
