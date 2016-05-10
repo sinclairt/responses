@@ -25,7 +25,7 @@ trait ControllerResponses
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function doStore($createRequest, $route = null, $routeParams = null)
+    protected function doStore( $createRequest, $route = null, $routeParams = null )
     {
         return $this->crudResponse($this->repository->add($createRequest->all()), $route, $routeParams);
     }
@@ -42,7 +42,7 @@ trait ControllerResponses
      *
      * @return mixed
      */
-    protected function doUpdate($updateRequest, Model $model, $route = null, $routeParams = null)
+    protected function doUpdate( $updateRequest, Model $model, $route = null, $routeParams = null )
     {
         try
         {
@@ -50,7 +50,7 @@ trait ControllerResponses
 
             $this->repository->update($updateRequest->all(), $model);
         }
-        catch (\Exception $e)
+        catch ( \Exception $e )
         {
             $result = false;
         }
@@ -61,7 +61,7 @@ trait ControllerResponses
     /**
      * respond to a crud add/update
      *
-     * @param $resultOfRepositoryAction
+     * @param $result
      * @param string $route
      *
      * @param $routeParams
@@ -69,51 +69,11 @@ trait ControllerResponses
      *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\JsonResponse
      */
-    protected function crudResponse($resultOfRepositoryAction, $route = null, $routeParams = null, $message = null)
+    protected function crudResponse( $result, $route = null, $routeParams = null, $message = null )
     {
         return $this->isAjax() ?
-            $resultOfRepositoryAction ?
-                SinclairResponse::jsonSuccess(array_merge($this->successMessage($message), ['data' => $resultOfRepositoryAction])) :
-                SinclairResponse::jsonFailure($this->failureMessage($message)) :
-            $this->redirectToRoute($route, $routeParams, $message);
-    }
-
-    protected function redirectToRoute($route, $routeParams, $message)
-    {
-        return redirect()
-            ->route($this->getRoute($route), $routeParams)
-            ->with('message', $message);
-    }
-
-    /**
-     * @return string
-     */
-    public function getRouteName()
-    {
-        $class = strtolower(str_replace('Controller', '', class_basename($this)));
-
-        return $this->prefix != null ? $this->prefix . '.' . $class : $class;
-    }
-
-    /**
-     * @param $route
-     *
-     * @return string
-     */
-    protected function getRoute($route)
-    {
-        return $route == null ? $this->getRouteName() . '.index' : $route;
-    }
-
-    /**
-     * @param $message
-     * @param $default
-     *
-     * @return mixed
-     */
-    protected function setMessage(&$message, $default)
-    {
-        return $message == null ? $default : $message;
+            $this->getAjaxResponse($result, $message) :
+            $this->redirectToRoute($route, $routeParams, $this->getMessage($result, $message));
     }
 
     /**
@@ -125,11 +85,53 @@ trait ControllerResponses
     }
 
     /**
+     * @param $result
+     *
+     * @param $message
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    protected function getAjaxResponse( $result, $message )
+    {
+        return $result ?
+            SinclairResponse::jsonSuccess(array_merge($this->successMessage($message), [ 'data' => $result ])) :
+            SinclairResponse::jsonFailure($this->failureMessage($message));
+    }
+
+    /**
+     * @param null $route
+     * @param null $routeParams
+     * @param null $message
+     *
+     * @return mixed
+     */
+    protected function redirectToRoute( $route = null, $routeParams = null, $message = null )
+    {
+        return redirect()
+            ->route($this->getRoute($route), $routeParams)
+            ->with('message', $message);
+    }
+
+    /**
+     * @param $result
+     * @param null $message
+     *
+     * @return null
+     */
+    private function getMessage( $result, $message = null )
+    {
+        if ( is_null($message) )
+            $result ? $this->successMessage($message) : $this->failureMessage($message);
+
+        return $message;
+    }
+
+    /**
      * @param $message
      *
      * @return array
      */
-    protected function successMessage(&$message)
+    protected function successMessage( &$message )
     {
         $message = $this->setMessage($message, 'Your request was processed successfully.');
 
@@ -141,10 +143,41 @@ trait ControllerResponses
      *
      * @return array
      */
-    protected function failureMessage(&$message)
+    protected function failureMessage( &$message )
     {
         $message = $this->setMessage($message, 'Your request failed to process, please try again.');
 
         return compact('message');
+    }
+
+    /**
+     * @param $message
+     * @param $default
+     *
+     * @return mixed
+     */
+    protected function setMessage( &$message, $default )
+    {
+        return $message == null ? $default : $message;
+    }
+
+    /**
+     * @param $route
+     *
+     * @return string
+     */
+    protected function getRoute( $route )
+    {
+        return $route == null ? $this->getRouteName() . '.index' : $route;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRouteName()
+    {
+        $class = strtolower(str_replace('Controller', '', class_basename($this)));
+
+        return $this->prefix != null ? $this->prefix . '.' . $class : $class;
     }
 }
