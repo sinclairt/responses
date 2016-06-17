@@ -99,7 +99,7 @@ trait ControllerResponses
     {
         return $result ?
             SinclairResponse::jsonSuccess(array_merge($this->successMessage($message), [ 'data' => $result ])) :
-            SinclairResponse::jsonFailure($this->failureMessage($message));
+            SinclairResponse::jsonFailure();
     }
 
     /**
@@ -137,7 +137,7 @@ trait ControllerResponses
      */
     protected function successMessage( &$message )
     {
-        $message = $this->setMessage($message, 'Your request was processed successfully.');
+        $message = $this->setMessage($message, trans('responses::responses.success.message'));
 
         return compact('message');
     }
@@ -149,7 +149,7 @@ trait ControllerResponses
      */
     protected function failureMessage( &$message )
     {
-        $message = $this->setMessage($message, 'Your request failed to process, please try again.');
+        $message = $this->setMessage($message = null, trans('responses::responses.failure.message'));
 
         return compact('message');
     }
