@@ -99,7 +99,7 @@ trait ControllerResponses
     {
         return $result ?
             SinclairResponse::jsonSuccess(array_merge($this->successMessage($message), [ 'data' => $result ])) :
-            SinclairResponse::jsonFailure();
+            SinclairResponse::jsonFailure($this->failureMessage($message));
     }
 
     /**
@@ -149,7 +149,10 @@ trait ControllerResponses
      */
     protected function failureMessage( &$message )
     {
-        $message = $this->setMessage($message = null, trans('responses::responses.failure.message'));
+        // we don't want to send the users success message as an error
+        $message = null;
+
+        $message = $this->setMessage($message, trans('responses::responses.failure.message'));
 
         return compact('message');
     }
