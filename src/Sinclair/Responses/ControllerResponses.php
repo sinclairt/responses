@@ -183,7 +183,7 @@ trait ControllerResponses
      */
     public function getRouteName()
     {
-        $class = strtolower($this->getResourceName());
+        $class = snake_case($this->getResourceName());
 
         return $this->prefix != null ? $this->prefix . '.' . $class : $class;
     }
