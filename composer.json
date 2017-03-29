@@ -1,5 +1,5 @@
 {
-  "name": "sinclair/responses",
+  "name": "sinclairt/responses",
   "description": "Standardise success and failure responses to both server and client side processing",
   "type": "library",
   "require": {
