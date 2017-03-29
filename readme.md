@@ -4,18 +4,7 @@ The responses package give you standardised responses for all your calls whether
 
 ### Installation
 
-Add the following repository to your ``` composer.json ```. You will have access as long as you belong to the Sinclair team on Bitbucket.
-
-``` sh
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "http://satis.wtbidev.co.uk"
-    }
-  ]
-```
-
-``` composer require sinclair/responses```
+``` composer require sinclairt/responses```
 
 Register the service provider:
 ``` Sinclair\Responses\SinclairResponsesServiceProvider ```
